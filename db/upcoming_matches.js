@@ -1,0 +1,25 @@
+const mongoose = require('mongoose');
+exports.schema = mongoose.model('upcoming_matches',{
+    key: { type: String },
+    name: { type: String },
+    short_name: { type: String },
+    sub_title: { type: String },
+    teams: { type: Object },
+    start_at: { type: Date, set: d => new Date(d * 1000) },
+    venue: { type: Object },
+    tournament: { type: Object },
+    association: { type: Object },
+    metric_group: { type: String },
+    status: { type: String },
+    winner: { type: String },
+    gender: { type: String },
+    sport: { type: String },
+    format: { type: String },
+    title: { type: String },
+    play_status: { type: String },
+    start_at_local: { type: Date,set: d => new Date(d * 1000) },
+    toss: { type: Object },
+    play: { type: Object },
+    players: { type: Object },
+  })
+exports.model = mongoose.model('upcoming_matches')
