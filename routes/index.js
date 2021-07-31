@@ -5,8 +5,9 @@ const home = require('../controllers/home')
 const fetch_data = require('../controllers/fetch-data')
 const cache = require('../cache/index')
 
+
 /* GET home page. */
-router.get('/',home.index);
+router.get('/',[cache.checkAuthentication,cache.setUpcomingMatches],home.index);
 // router.get('/',admin.login);
 router.post('/save-selected-tournaments',admin.saveSelected);
 router.get('/get-tournaments',cache.checkAuthentication,admin.getUpcomingTournaments);

@@ -55,26 +55,30 @@ exports.getUpcomingTournaments = (req,resp,next) =>{
 }
 
 exports.saveSelected = (req,resp,next) =>{
-    const {tournaments,token} = req.body
+    const {tournaments} = req.body
+    const hundreds_key_mens = 'c.season.hmc2021.19c81'
+    const hundreds_key_womens = ''
+    tournaments.push(hundreds_key_mens)
+    tournaments.push(hundreds_key_womens)
     client.set('selected_tournaments',JSON.stringify(tournaments),redis.print);
-    tournaments.forEach(key => {
-        var tournament_key = key
-        var options = {
-            method: 'GET',
-            url: base_url+`v5/cricket/${project_key}/tournament/${tournament_key}/featured-matches/`,
-            headers: {
-                'rs-token': token
-            }
-        }
-        request(options, async function (error, response) {
-            if (error) throw new Error(error)
-            const upcoming_matches_data = JSON.parse(response.body).data.matches
-            upcoming_matches_data.forEach(async element => {
-                const query = {key:element.key}
-                const db_resp = await upcoming_matches_schema.model.updateOne(query,element,{ upsert : true })
-            });
-            console.log(key+' saved');
-        }) 
-    });
+    // tournaments.forEach(key => {
+    //     var tournament_key = key
+    //     var options = {
+    //         method: 'GET',
+    //         url: base_url+`v5/cricket/${project_key}/tournament/${tournament_key}/featured-matches/`,
+    //         headers: {
+    //             'rs-token': token
+    //         }
+    //     }
+    //     request(options, async function (error, response) {
+    //         if (error) throw new Error(error)
+    //         const upcoming_matches_data = JSON.parse(response.body).data.matches
+    //         upcoming_matches_data.forEach(async element => {
+    //             const query = {key:element.key}
+    //             const db_resp = await upcoming_matches_schema.model.updateOne(query,element,{ upsert : true })
+    //         });
+    //         console.log(key+' saved');
+    //     }) 
+    // });
     resp.send('Data Saved');
 }

@@ -7,7 +7,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
 var routes = require('./routes/index');
-
+const cron = require('node-cron')
+var upComingMatches = require('./controllers/fetch-data')
 var app = express();
 
 // view engine setup
@@ -32,6 +33,12 @@ mongoose.connect('mongodb+srv://'+process.env.DBUSER+':'+process.env.DBPASS+'@'+
 app.use(function(req, res, next) {
   next(createError(404));
 });
+/**
+ * Crone Schedule
+ */
+ cron.schedule('*/5 * * * *', async function () {
+  // upComingMatches.getUpcomingMatches()
+})
 
 // error handler
 app.use(function(err, req, res, next) {

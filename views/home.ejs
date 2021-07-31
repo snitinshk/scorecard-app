@@ -1,3 +1,575 @@
-<html>
-<h1>This is main page</h1>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Cricket Info</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo-wrap">
+            <img src="assets/images/logo.JPG" alt="logo" />
+        </div>
+        <div class="header-nav-wrap">
+            <ul>
+                <li>
+                    <a href="javascript:void(0);">Home</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);">About us</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- header end-->
+    <!-- event card start-->
+    <div class="event-card-wrap">
+        <div class="event-card-left">
+            <video autoplay muted loop>
+                <source src="assets/videos/themevideo.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="event-card-right">
+            <% recent_matches.forEach(function(match) { %>
+                <!-- card start-->
+                <div class="event-card match-detail <%= (match.status != 'not_started')?'pointer':'' %>" data-status="<%=  match.status %>" id="<%= match.key %>">
+                    <div class="event-title">
+                        <span><%= match.name %></span>
+                    </div>
+                    <div class="event-card-details" data-match-format="<%= match.format %>" data-start-time="<%= moment(match.start_at).valueOf() %>" data-start-date="<%= moment(match.start_at).format('DD-MM-YYYY') %>"  id="<%= match.key %>">
+                        <div class="event-card-details-top">
+                            <div class="event-timing">
+                                <span><%= moment(match.start_at).format('MMM D, h:mm a') %></span>
+                            </div>
+                            <!-- <div class="event-current-hightlights">
+                                <span class="event-hightlights-team">WI</span>
+                                <span class="event-hightlights-red-info">0</span>
+                                <span class="event-hightlights-green-info">1</span>
+                            </div> -->
+                        </div>
+                        <div class="event-card-details-bottom">
+                            <div class="event-card-details-row">
+                                <div class="event-card-team-name">
+                                    <span>
+                                        <% if(match.batting_first_flag){ %>
+                                            <img src="assets/images/<%= (match.batting_first_name).toLowerCase() %>.png"/>
+                                        <% } else { %>
+                                            <div class="team-firstname"><%= (match.batting_first_name).charAt(0) %></div>
+                                        <% }  %>    
+                                        <%= match.batting_first_name %>
+                                    </span>
+                                </div>
+                                <% if(match.status == 'started' || match.status == 'completed') {%>
+                                <div class="event-card-team-score">
+                                    <span id="<%= match.batting_first_index %>_<%= match.key %>" ><%= match.batting_first_score %></span>
+                                </div>
+                                <% } %>
+                            </div>
+
+                            <div class="event-card-details-row">
+                                <div class="event-card-team-name">
+                                    <span>
+                                        <% if(match.batting_first_flag){ %>
+                                            <img src="assets/images/<%= (match.batting_second_name).toLowerCase() %>.png"/>
+                                        <% } else { %>
+                                            <div class="team-firstname"><%= (match.batting_second_name).charAt(0) %></div>
+                                        <% }  %> 
+                                        <%= match.batting_second_name %>
+                                    </span>
+                                </div>
+                                <% if(match.status == 'started' || match.status == 'completed') {%>
+                                    <div class="event-card-team-score">
+                                        <span id="<%= match.batting_second_index %>_<%= match.key %>"><%= match.batting_second_score %></span>
+                                    </div>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-card-final-update won">
+                        <% if(match.status == 'completed'){ %>
+                            <span><%= match.play.result.msg %></span>
+                        <% } else if(match.status == 'not_started') { %>
+                            <span>Upcoming</span>
+                        <% } else { %>
+                            <span>Live</span>
+                        <% } %>
+                    </div>
+                </div>
+                <!-- card end-->
+            <% }) %>
+        </div>
+    </div>
+    <!-- event card end-->
+    <!--main content wrap-->
+    <div class="main-content-wrap">
+        <div class="main-content-left">
+            <!--widget start-->
+            <div class="left-widget-wrap">
+                <div class="left-widget-title">
+                    <h3>Live Streaming Link</h3>
+                </div>
+                <div class="left-widget-body">
+                    <div class="left-widget-list">
+                        <a target="_blank" href="https://www.jokerlivestream.xyz/home-1.html"><img src="assets/images/live.png" />World is About Cricket Link 1</a>
+                    </div>
+                </div>
+            </div>
+            <!--widget end-->
+            <!--widget start-->
+            <div class="left-widget-wrap">
+                <div class="left-widget-title">
+                    <h3>Tip of the day</h3>
+                </div>
+                <div class="left-widget-body">
+                    <div class="widget-note">
+                        <p>when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                    </div>
+                </div>
+            </div>
+            <!--widget end-->
+        </div>
+        <div class="main-content-middle">
+            <div class="main-wrap">
+                <!--score wrapper start-->
+                <div class="score-wrapper">
+                    <!-- live score wrap start-->
+                    <div class="live-score-wrap">
+                        <div class="main-team-score-card">
+                            <div class="main-team-score">
+                                <span class="team-info">
+                                    <span>
+                                    <!-- <span class="ico">
+                                        <img src="" id="team1_img" />
+                                        </span> -->
+                                    <span id="team1_name"></span>
+                                    </span>
+                                </span>
+                                <span class="team-run">
+                                    <span id="team1_score"></span>
+                                <!-- <small id="team1_overs" >(20.0)</small> -->
+                                </span>
+                            </div>
+                            <div class="main-team-score">
+                                <span class="team-info">
+                                    <span>
+                                    <!-- <span class="ico">
+                                        <img src="" id="team2_img" />
+                                        </span> -->
+                                    <span id="team2_name"></span>
+                                    </span>
+                                </span>
+                                <span class="team-run">
+                                    <span id="team2_score"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="flash-msg-wrap">
+                            <span id="flash_event"></span>
+                            <img id="flash_event_img" src="" />
+                        </div>
+                    </div>
+                    <!-- live score wrap end-->
+
+                    <!-- current player score board start -->
+                    <div class="current-player-score-board-wrap">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Batsmen</th>
+                                        <th>Runs</th>
+                                        <th>Balls</th>
+                                        <th>4s</th>
+                                        <th>6s</th>
+                                        <th>SR</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="inningbreak" id="striker_name"></td>
+                                        <td class="inningbreak" id="striker_runs"></td>
+                                        <td class="inningbreak" id="striker_balls"></td>
+                                        <td class="inningbreak" id="striker_fours"></td>
+                                        <td class="inningbreak" id="striker_sixes"></td>
+                                        <td class="inningbreak" id="striker_strike_rate"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="inningbreak" id="non_striker_name"></td>
+                                        <td class="inningbreak" id="non_striker_runs"></td>
+                                        <td class="inningbreak" id="non_striker_balls"></td>
+                                        <td class="inningbreak" id="non_striker_fours"></td>
+                                        <td class="inningbreak" id="non_striker_sixes"></td>
+                                        <td class="inningbreak" id="non_striker_strike_rate"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- current player score board end -->
+                    <!-- overall info start -->
+                    <div class="overall-info-row">
+                        <div class="overall-info-col">
+                            <div class="overall-info-head">
+                                <h3>Run Rate:</h3>
+                            </div>
+                            <div class="overall-info-txt">
+                                <h3 id='run_rate'></h3>
+                            </div>
+                        </div>
+                        <div class="overall-info-col">
+                            <!-- <div class="overall-info-head">
+                                <h3>&nbsp</h3>
+                            </div> -->
+                            <div class="overall-info-txt">
+                                <h3 id="highlight"></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overall-info-row">
+                        <div class="overall-info-col">
+                            <div class="overall-info-head">
+                                <h3>Bowler</h3>
+                            </div>
+                            <div class="overall-info-txt">
+                                <h3>
+                                    <span class="inningbreak" id="bowler_name"></span>
+                                    <span>&nbsp;&nbsp;</span>
+                                    <span class="inningbreak" id="bowler_stats"></span>
+                                    <!-- <span id="bowler_runs"></span>
+                                   <span id="bowler_wickets"></span> -->
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- over all info end -->
+                    <!-- last bowls info start -->
+                    <div class="last-bowls-info-wrap">
+                        <div class="last-bowls-title">
+                            <span>Last 12 Balls:</span>
+                        </div>
+                        <div class="last-bowls-info inningbreak" id="last_12_balls"></div>
+                    </div>
+                    <!-- last bowls info end -->
+                </div>
+                <!--score wrapper end-->
+                <!-- social media link mapping start -->
+                <!-- <div class="follow-wrapper">
+                    <div class="follow-title">
+                        <span>Follow us</span>
+                    </div>
+                    <div class="follow-link">
+                        <a class="follow-icons" href="javascript:void(0);" target="_blank">
+                            <img src="assets/images/youtube.png"> World Is About Cricket
+                        </a>
+                        <a class="follow-icons" href="javascript:void(0);" target="_blank">
+                            <img src="assets/images/twitter.png"> worldisaboutcricket
+                        </a>
+                        <a class="follow-icons" href="javascript:void(0);" target="_blank">
+                            <img src="assets/images/facebook.png"> worldisaboutcricket
+                        </a>
+                    </div>
+                </div> -->
+                <!-- social media link mapping End -->
+            </div>
+        </div>
+        <div class="main-content-right">
+            <div class="event-chat-wrap">
+                <div class="event-chat-inner">
+                    <div class="event-chat-list-wrap">
+
+                        <div class="event-chat-list">
+                            <div class="event-chat-row">
+                                <div class="event-chat-user-pic">A</div>
+                                <div class="event-chat-user-info">
+                                    <span><span>Shivam</span> Hi</span>
+                                </div>
+                            </div>
+                            <div class="event-chat-row">
+                                <div class="event-chat-user-pic">A</div>
+                                <div class="event-chat-user-info">
+                                    <span><span>Shivam</span> Hello</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-chat-action">
+                        <div class="event-chat-input-wrap">
+                            <input type="text" class="chat-input" placeholder="write your thoughts...">
+                            <button type="button"><img src="assets/images/paper-plane.png"/></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- main content wrap end-->
+    <div class="modal fade" id="select_match_modal" role="dialog">
+        <div class="modal-dialog modal-md">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="Enter the match url" id='url_value'></textarea>
+                        <input type="text" class="form-control" style="margin-top:10px" name="winner1" placeholder="Winner match 1" id="winner1">
+                        <input type="text" class="form-control" style="margin-top:10px" name="winner2" placeholder="Winner match 2" id="winner2">
+                        <input type="text" class="form-control" style="margin-top:10px" name="winner3" placeholder="Winner match 3" id="winner3">
+                        <input type="text" class="form-control" style="margin-top:10px" name="score_prediction1" placeholder="Match 1 innings Score" id="score_prediction1">
+                        <input type="text" class="form-control" style="margin-top:10px" name="score_prediction2" placeholder="Match 2 Innings Score" id="score_prediction2">
+                        <input type="text" class="form-control" style="margin-top:10px" name="score_prediction3" placeholder="Match 3 Innings Score" id="score_prediction3">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="confirm-btn" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
 </html>
+
+<script>
+    var match_key = null
+    $(document).ready(function(){
+        $('.match-detail').click(function(){
+            if($(this).attr('data-status') == 'started'){
+                match_key = $(this).attr('id');
+                $.get( "/live-score",{ key: match_key }, function(response) {
+                    handleSelectedScore(JSON.parse(response).data)
+                });
+            }else{
+                console.log('match not started');
+                return false;
+            }
+        })
+    })
+
+    function handle_recent_balls(recent_overs){
+        var last12_ball_html = ``;
+        var ball_count = 1;
+        recent_overs.forEach(over => {
+            if(over.ball_repr){
+                over.ball_repr.reverse();
+                over.ball_repr.forEach(ball => {
+                    if(ball_count <= 12){
+                        var event = ball;
+                        if(event != 'w'){
+                            event = ball.replace (/[^\d.]/g,'')
+                            // console.log('event '+event);
+                        }
+                        last12_ball_html += `<span class="` + getClassbyRun(event) + `">` + event + `</span>`
+                    }
+                    ball_count++;
+                });
+            }
+        });
+        $('#last_12_balls').html(last12_ball_html);
+    }
+    function getClassbyRun(action) {
+        if (action == '0') {
+            return 'dot-bowl'
+        } else if (action == '1' || action == '1' || action == '2' || action == '3' || action == '5') {
+            return 'run';
+        } else if (action == '4') {
+            return 'boundry';
+        } else if (action == '6') {
+            return 'six';
+        } else if (action == 'w') {
+            return 'wicket';
+        } else {
+            return 'run';
+        }
+    }
+    function handle_lastball_data(ball_obj){
+        var batting = (ball_obj)?ball_obj.batsman:null;
+        var bowling = (ball_obj)?ball_obj.bowler:null;
+        var event = '';
+        if(ball_obj.ball_type == 'no_ball'){
+            event = 'No Ball';
+        }
+        else if(ball_obj.ball_type == 'wide'){
+            event = 'Wide';
+        }
+        else if(bowling.is_wicket){
+            event = 'w'
+        }else if(batting.is_dot_ball){
+            event = '0'
+        }else if(batting.is_four){
+            event = '4'
+        }else if(batting.is_six){
+            event = '6'
+        }else{
+            event = batting.runs
+        }
+        
+        $('#flash_event').text('');
+        $('#flash_event_img').attr('src', '');
+
+        if (event == '6' || event == '4') {
+            $('#flash_event').css("color", "red");
+            $('#flash_event').text(getEventName(event));
+        } else if (event == 'w') {
+            $('#flash_event_img').attr('src', 'assets/images/wkt-animate.gif');
+            $('#flash_event_img').css('width', '40px');
+        } else {
+            $('#flash_event').css("color", "black");
+            $('#flash_event').text(getEventName(event));
+        }
+    }
+    function getEventName(event) {
+        if (event == 'w') return 'Wicket'
+        else if (event == 'wd') return 'Wide'
+        else return event;
+    }
+    function handleSelectedScore(match){
+        var play = (match)?match.play:null;
+        var key = match.key
+        var live = (play)?play.live:null
+        var players = match.players
+        const current_status = match.play_status
+        //handle last ball
+        if(live){
+            last_ball_key = live.last_ball_key
+            if(last_ball_key){
+                handle_lastball_data(play.related_balls[last_ball_key])
+            }
+        }
+        //recent balls
+        var recent_overs = (live)?live.recent_overs_repr:null
+        if(recent_overs){
+            handle_recent_balls(recent_overs)
+        }
+        //highlight
+        var required_score = (live && live.required_score)?live.required_score.title:null
+        if(required_score){
+            $('#highlight').text(required_score)
+        }else if(current_status == 'innings_break'){
+            $('#highlight').text('Innings Break')
+            $('#flash_event').text('');
+            $('#flash_event_img').attr('src', '');
+        } 
+        
+        var run_rate = (live && live.score)?live.score.run_rate:null
+        if(run_rate){
+            $('#run_rate').text(parseFloat(run_rate));
+        } 
+        
+        //Current Bowler Key
+        var bowler_key = (live)?live.bowler_key:null;
+        if(bowler_key){
+            var bowler_name = players[bowler_key].player.name
+            var runs = players[bowler_key].score[1].bowling.score.runs
+            var wickets = players[bowler_key].score[1].bowling.score.wickets
+            var overs = players[bowler_key].score[1].bowling.score.overs.join('.')
+            $('#bowler_name').text(bowler_name);
+            $('#bowler_stats').text(overs+' - '+runs+' - '+wickets);
+        }
+
+        //Strike and non-strike information
+        var striker_key = (live)?live.striker_key:null
+        if(striker_key){
+            var striker_name = players[striker_key].player.name
+            var striker_runs = players[striker_key].score[1].batting.score.runs
+            var striker_balls = players[striker_key].score[1].batting.score.balls
+            var striker_fours = players[striker_key].score[1].batting.score.fours
+            var striker_sixes = players[striker_key].score[1].batting.score.sixes
+            var striker_strike_rate = players[striker_key].score[1].batting.score.strike_rate
+
+            $('#striker_name').text(striker_name)
+            $('#striker_runs').text(striker_runs)
+            $('#striker_balls').text(striker_balls)
+            $('#striker_fours').text(striker_fours)
+            $('#striker_sixes').text(striker_sixes)
+            $('#striker_strike_rate').text(striker_strike_rate)
+        }
+
+        var non_striker_key = (live)?live.non_striker_key:null
+
+        if(non_striker_key){
+
+            var non_striker_name = players[non_striker_key].player.name        
+            var non_striker_runs = players[non_striker_key].score[1].batting.score.runs
+            var non_striker_balls = players[non_striker_key].score[1].batting.score.balls
+            var non_striker_fours = players[non_striker_key].score[1].batting.score.fours
+            var non_striker_sixes = players[non_striker_key].score[1].batting.score.sixes
+            var non_striker_strike_rate = players[non_striker_key].score[1].batting.score.strike_rate
+
+            $('#non_striker_name').text(non_striker_name)
+            $('#non_striker_runs').text(non_striker_runs)
+            $('#non_striker_balls').text(non_striker_balls)
+            $('#non_striker_fours').text(non_striker_fours)
+            $('#non_striker_sixes').text(non_striker_sixes)
+            $('#non_striker_strike_rate').text(non_striker_strike_rate)
+
+        }
+
+        if(play){
+            var first_batting = (play)?play.first_batting:'';
+            var second_batting = (first_batting == 'a')?'b':'a';
+            var batting_first_name = match.teams[first_batting].code
+            var batting_second_name = match.teams[second_batting].code
+            var first_inning_score = (play.innings[first_batting+'_1'])?play.innings[first_batting+'_1'].score_str:'';
+            var second_inning_score = (play.innings[second_batting+'_1'])?play.innings[second_batting+'_1'].score_str:'';
+            
+            $('#team1_name').text(batting_first_name+' - ')
+            $('#team1_score').text(first_inning_score)
+
+            $('#team2_name').text(batting_second_name+' - ')
+            $('#team2_score').text(second_inning_score)
+        }
+    }
+    //Later put check here that api hitting should start maximum after 8 hrs
+    setInterval(() => {
+        var today = "<%= moment().format('DD-MM-YYYY') %>"
+        var timenow = "<%= moment().valueOf() %>"
+        var todays_match = []
+        $('.event-card-details').each(function(ind,attr){
+            var event_time = $(this).attr('data-start-time');
+            // console.log(event_time,' ',timenow)
+            if(timenow >= event_time){
+                var match_key = $(this).attr('id');
+                getData(match_key);
+                // todays_match.push(match_key);
+            }
+        });    
+    }, 5000);
+
+    function getData(key){
+        $.get( "/live-score",{ key: key }, function(response) {
+            handleLiveScoreUpcomingMatch(JSON.parse(response).data)
+            if(match_key && match_key == key){
+                console.log('ploting data for detail: '+match_key)
+                handleSelectedScore(JSON.parse(response).data)
+            }
+        });
+    }
+
+    function handleLiveScoreUpcomingMatch(match){
+        
+        var play = (match)?match.play:null
+        var key = (match)?match.key:null
+        if(play){
+            var first_batting = play.first_batting;
+            var second_batting = (first_batting == 'a')?'b':'a';
+            var first_inning_score = (play.innings[first_batting+'_1'])?play.innings[first_batting+'_1'].score_str:'';
+            var second_inning_score = (play.innings[second_batting+'_1'])?play.innings[second_batting+'_1'].score_str:'';
+            $('#'+first_batting+'_'+key).text(first_inning_score)
+            $('#'+second_batting+'_'+key).text(second_inning_score)
+            
+            if(play.live){
+                $('#'+key).attr('data-status','started');
+            }
+        }
+    }
+
+</script>
