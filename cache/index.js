@@ -78,6 +78,7 @@ exports.setUpcomingMatches = (req,resp,next) => {
                 }
                 request(options, async function (error, response) {
                     if (error) throw new Error(error)
+                    console.log(response.body);
                     const upcoming_matches_data = JSON.parse(response.body).data.matches
                     upcoming_matches_data.forEach(async element => {
                         const query = {key:element.key}
