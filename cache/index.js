@@ -7,6 +7,10 @@ const api_key = process.env.API_KEY
 const base_url = process.env.BASE_URL
 const upcoming_matches_schema = require('../db/upcoming_matches');
 
+client.on("error", function (err) {
+    console.log("Error " + err);
+});
+
 exports.setLiveScore = (data) => {
     client.set('live_score', data,redis.print);
 }
