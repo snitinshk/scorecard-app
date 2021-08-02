@@ -25,25 +25,25 @@ exports.checkAuthentication = (req,resp,next) => {
     });
 }
 
-exports.save_auth = ()=>{
-    const options = {
-        method: 'POST',
-        url: base_url+`v5/core/${project_key}/auth/`,
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            api_key: api_key
-        })
+// exports.save_auth = ()=>{
+//     const options = {
+//         method: 'POST',
+//         url: base_url+`v5/core/${project_key}/auth/`,
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({
+//             api_key: api_key
+//         })
     
-        }
-        request(options, function (error, response) {
-        if (error) console.log(error)
-            const auth_resp = JSON.parse(response.body)
-            const expire_time = auth_resp.data.expires;
-            client.set('auth_token',auth_resp.data.token,'EXAT',expire_time)
-    })
-}
+//         }
+//         request(options, function (error, response) {
+//         if (error) console.log(error)
+//             const auth_resp = JSON.parse(response.body)
+//             const expire_time = auth_resp.data.expires;
+//             client.set('auth_token',auth_resp.data.token,'EXAT',expire_time)
+//     })
+// }
 
 save_auth = ()=>{
     const options = {
@@ -61,8 +61,8 @@ save_auth = ()=>{
         if (error) console.log(error)
             console.log(response.body);
             const auth_resp = JSON.parse(response.body)
-            const expire_time = auth_resp.data.expires;
-            client.set('auth_token',auth_resp.data.token,'EXAT',expire_time)
+            // const expire_time = auth_resp.data.expires;
+            client.set('auth_token',auth_resp.data.token)
     })
 }
 exports.setUpcomingMatches = (req,resp,next) => {
