@@ -27,7 +27,7 @@ exports.getLiveScore = async function (req, resp, next) {
           const live_score_data = JSON.parse(response.body)
           const expire_time = (live_score_data.cache)?live_score_data.cache.expires:'';
           // ,'EXAT',(Math.floor(expire_time)+5)
-          client.set(key,response.body)
+          // client.set(key,response.body)
           // client.expireat(key, (Math.floor(expire_time)+5));
           resp.send(response.body);
         })

@@ -59,7 +59,7 @@
                                 <div class="event-card-team-name">
                                     <span>
                                         <% if(match.batting_first_flag){ %>
-                                            <img src="assets/images/<%= (match.batting_first_code).toLowerCase() %>.png"/>
+                                            <img src="assets/teams/<%= (match.batting_first_code).toLowerCase() %>.png"/>
                                         <% } else { %>
                                             <div class="team-firstname"><%= (match.batting_first_name).charAt(0) %></div>
                                         <% }  %>    
@@ -77,7 +77,7 @@
                                 <div class="event-card-team-name">
                                     <span>
                                         <% if(match.batting_first_flag){ %>
-                                            <img src="assets/images/<%= (match.batting_second_code).toLowerCase() %>.png"/>
+                                            <img src="assets/teams/<%= (match.batting_second_code).toLowerCase() %>.png"/>
                                         <% } else { %>
                                             <div class="team-firstname"><%= (match.batting_second_name).charAt(0) %></div>
                                         <% }  %> 
