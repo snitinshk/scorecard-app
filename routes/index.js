@@ -9,7 +9,7 @@ const cache = require('../cache/index')
 
 /* GET home page. */
 // [cache.checkAuthentication,cache.setUpcomingMatches]
-router.get('/',home.index);
+router.get('/',[cache.checkAuthentication,cache.setUpcomingMatches],home.index);
 router.post('/save-user',chat.save_user);
 router.post('/send-message',chat.send_message);
 router.get('/get_allmessage',chat.get_allmessage);
