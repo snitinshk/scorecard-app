@@ -34,10 +34,12 @@ function creatMatchObject(match){
         matchObj['batting_first_score'] = '';
         matchObj['batting_first_index'] = 'a';
         matchObj['batting_first_name'] = match.teams.a.name
+        matchObj['batting_first_code'] = match.teams.a.code
 
         matchObj['batting_second_score'] = '';
         matchObj['batting_second_index'] = 'b';
         matchObj['batting_second_name'] = match.teams.b.name
+        matchObj['batting_second_code'] = match.teams.b.code
 
         matchObj['batting_first_flag'] = isFlagAvailable(match.teams.a.code)
         matchObj['batting_second_flag'] = isFlagAvailable(match.teams.b.code)
@@ -48,14 +50,15 @@ function creatMatchObject(match){
         matchObj['batting_first_index'] = first_batting;
         matchObj['batting_first_score'] = (play.innings[first_batting+'_1'])?play.innings[first_batting+'_1'].score_str:'';
         matchObj['batting_first_name'] = match.teams[first_batting].name
+        matchObj['batting_first_code'] = match.teams[first_batting].code
         
         matchObj['batting_second_index'] = second_batting;
         matchObj['batting_second_score'] = (play.innings[second_batting+'_1'])?play.innings[second_batting+'_1'].score_str:'';
         matchObj['batting_second_name'] = match.teams[second_batting].name
-        matchObj['batting_second_flag'] = isFlagAvailable(match.teams[second_batting].code)
+        matchObj['batting_second_code'] = match.teams[second_batting].code
 
-        matchObj['batting_first_flag'] = isFlagAvailable(match.teams[first_batting].code)
         matchObj['batting_second_flag'] = isFlagAvailable(match.teams[second_batting].code)
+        matchObj['batting_first_flag'] = isFlagAvailable(match.teams[first_batting].code)
     }
     
     matchObj['format'] = match.format;
@@ -63,7 +66,7 @@ function creatMatchObject(match){
     matchObj['key'] = match.key;
     matchObj['start_at'] = match.start_at;
     matchObj['name'] = match.tournament.name;
-    // console.log(matchObj);
+    console.log(matchObj);
     return matchObj;
 }
 

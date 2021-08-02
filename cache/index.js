@@ -63,7 +63,7 @@ save_auth = ()=>{
             const auth_resp = JSON.parse(response.body)
             // const expire_time = auth_resp.data.expires;
             client.set('auth_token',auth_resp.data.token)
-            client.expireat('auth_token', expire_time);
+            // client.expireat('auth_token', expire_time);
     })
 }
 exports.setUpcomingMatches = (req,resp,next) => {
