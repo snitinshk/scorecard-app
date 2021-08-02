@@ -29,7 +29,7 @@ $(document).ready(function(){
     
     get_allmessages();
     setInterval(() => {
-        if(localStorage.getItem('msg_timestamp')){
+        if(localStorage.getItem('token') && localStorage.getItem('msg_timestamp')){
             check_newmessages();
         }
     }, 3000);
