@@ -23,18 +23,26 @@ function show_message(msg_data){
     msg_data.forEach(chat_msg => {
         $('.event-chat-list').append(chat_html(chat_msg));
     });
+    $(".event-chat-list-wrap").animate({
+        scrollTop: 1000500
+    }, 1000);
 }
 
 $(document).ready(function(){
     
+    console.log($('.event-chat-wrap').outerHeight());
+
     get_allmessages();
     setInterval(() => {
         if(localStorage.getItem('token') && localStorage.getItem('msg_timestamp')){
             check_newmessages();
         }
     }, 3000);
-
-    $('.chat-input').click(function(){
+    //Hide the login option is already logged in
+    if(localStorage.getItem('token') && localStorage.getItem('name')){
+        $('.chat-login-nav').hide();
+    }
+    $('.chat-login-nav').click(function(){
         if(!localStorage.getItem('token') && !localStorage.getItem('name')){
             $('#myModal').fadeIn(500)
         }
@@ -53,6 +61,7 @@ $(document).ready(function(){
                 $name.val('')
                 $email.val('')
                 $('#myModal').fadeOut(500)
+                $('.chat-login-nav').hide()
             }else{
                 alert('Something went wrong please try again!');
             }
@@ -72,6 +81,10 @@ $(document).ready(function(){
             msg:msg_text
         }
         $('.event-chat-list').append(chat_html(chat_obj));
+        console.log($('.event-chat-wrap').innerHeight());
+        $(".event-chat-list-wrap").animate({
+            scrollTop: 1000500
+        }, 1000);
     })
 
 })
@@ -88,6 +101,7 @@ function send_message(msg,token){
 }
 
 function chat_html(chat){
+
     return `<div class="event-chat-row">
                 <div class="event-chat-user-pic">`+chat.sender.charAt(0)+`</div>
                     <div class="event-chat-user-info">
