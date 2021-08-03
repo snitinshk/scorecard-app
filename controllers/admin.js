@@ -37,7 +37,7 @@ exports.featured = (req,resp,next) =>{
             }
             request(options, function (error, response) {
                 if (error) throw new Error(error)
-                // resp.send(response.body);
+                console.log(response.body);
                 const upcoming_tournaments = JSON.parse(response.body);
                 resp.render('featured',{token:token,tournaments:upcoming_tournaments.data.tournaments});
             })
