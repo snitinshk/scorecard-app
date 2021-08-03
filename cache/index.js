@@ -63,7 +63,7 @@ save_auth = ()=>{
             console.log(response.body);
             const auth_resp = JSON.parse(response.body)
             const expire_time = auth_resp.data.expires;
-            client.set('auth_token',auth_resp.data.token,'EXAT',expire_time,function(err){
+            client.hmset('auth_token',auth_resp.data.token,'EXAT',expire_time,function(err){
                 console.log('token set');
                 if(err)console.log(err)
             })
