@@ -57,7 +57,7 @@ exports.getUpcomingTournaments = (req,resp,next) =>{
 exports.saveSelected = (req,resp,next) =>{
     const {tournaments} = req.body
     const hundreds_key_mens = 'c.season.hmc2021.19c81'
-    const hundreds_key_womens = ''
+    const hundreds_key_womens = 'c.season.hwc.56651'
     tournaments.push(hundreds_key_mens)
     tournaments.push(hundreds_key_womens)
     client.set('selected_tournaments',JSON.stringify(tournaments),redis.print);

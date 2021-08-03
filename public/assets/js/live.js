@@ -191,16 +191,15 @@ var match_key = null
     }
     //Later put check here that api hitting should start maximum after 8 hrs
     setInterval(() => {
-        var today = "<%= moment().format('DD-MM-YYYY') %>"
-        var timenow = "<%= moment().valueOf() %>"
-        var todays_match = []
         $('.event-card-details').each(function(ind,attr){
             var event_time = $(this).attr('data-start-time');
-            // console.log(event_time,' ',timenow)
+            console.log(event_time,' '+ timenow+' '+match_key)
             if(timenow >= event_time){
-                var match_key = $(this).attr('id');
-                getData(match_key);
-                // todays_match.push(match_key);
+                //Shot first match data in score detail
+                if(ind == 0 && match_key != null){
+                    match_key = $(this).attr('id');
+                }
+                getData($(this).attr('id'));
             }
         });    
     }, 5000);
