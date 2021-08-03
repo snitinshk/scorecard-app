@@ -62,16 +62,16 @@ save_auth = ()=>{
         if (error) console.log(error)
             console.log(response.body);
             const auth_resp = JSON.parse(response.body)
-            // const expire_time = auth_resp.data.expires;
-            client.set('auth_token',auth_resp.data.token)
+            const expire_time = auth_resp.data.expires;
+            client.set('auth_token',auth_resp.data.token,'EXAT',expire_time,function(err){
+                console.log('token set');
+                if(err)console.log(err)
+            })
             // client.expireat('auth_token', expire_time);
     })
 }
 exports.setUpcomingMatches = (req,resp,next) => {
-    // client.set('test_key','value set','EX',10,function(err){
-    //     console.log('value set');
-    //     if(err)console.log(err)
-    // })
+
     client.get('auth_token',function(error,token){
         if(error)console.log(error)
         client.get('selected_tournaments',function(error,tournaments){
