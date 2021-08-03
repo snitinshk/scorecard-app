@@ -15,6 +15,7 @@ exports.setLiveScore = (data) => {
     client.set('live_score', data,redis.print);
 }
 exports.checkAuthentication = (req,resp,next) => {
+
     client.get('auth_token',function(err,data){
         if(err)console.log(err)
         if(data === null){
@@ -67,6 +68,10 @@ save_auth = ()=>{
     })
 }
 exports.setUpcomingMatches = (req,resp,next) => {
+    // client.set('test_key','value set','EX',10,function(err){
+    //     console.log('value set');
+    //     if(err)console.log(err)
+    // })
     client.get('auth_token',function(error,token){
         if(error)console.log(error)
         client.get('selected_tournaments',function(error,tournaments){

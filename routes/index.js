@@ -11,11 +11,15 @@ const cache = require('../cache/index')
 // [cache.checkAuthentication,cache.setUpcomingMatches]
 router.get('/',[cache.checkAuthentication,cache.setUpcomingMatches],home.index);
 router.post('/save-user',chat.save_user);
+// Admin
+router.all('/admin-login',admin.index);
+router.post('/save-selected',admin.saveSelected);
+router.get('/xx-featured-xx',cache.checkAuthentication,admin.featured);
+
 router.post('/send-message',chat.send_message);
 router.get('/get_allmessage',chat.get_allmessage);
 router.get('/get_newmessage',chat.get_newmessage);
-router.post('/save-selected-tournaments',admin.saveSelected);
-router.get('/get-tournaments',cache.checkAuthentication,admin.getUpcomingTournaments);
+
 router.get('/live-score',[cache.checkAuthentication,cache.getLiveScore],fetch_data.getLiveScore);
 router.get('/upcoming-matches',cache.checkAuthentication,cache.getUpcomingMatches,fetch_data.getUpcomingMatches);
 

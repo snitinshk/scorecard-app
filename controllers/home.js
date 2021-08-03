@@ -15,15 +15,16 @@ exports.index = async function (req, resp, next) {
             format:{ $ne:'test' }
         },
         '',{skip:0, limit:4,sort:{start_at: 1}})
-        /**
-         * Create formatted object of upcoming matches
-         */
-        let formatted_match = []
-        upcoming.forEach(match => {
-            formatted_match.push(creatMatchObject(match));
-        });   
-        
-    resp.render('home.ejs',{moment:moment,recent_matches:formatted_match});
+    /**
+     * Create formatted object of upcoming matches
+     */
+    let formatted_match = []
+    upcoming.forEach(match => {
+        formatted_match.push(creatMatchObject(match));
+    });  
+    client.get('todays_winner',function(error,winner){
+        resp.render('home.ejs',{moment:moment,recent_matches:formatted_match,todays_winner:winner});
+    });
 }
 
 function creatMatchObject(match){
