@@ -504,6 +504,7 @@ span.team-info>span>.ico>img {
     background-color: #fff;
     box-shadow: 0px 0px 19px rgb(0 0 0 / 6%);
     border-radius: 5px;
+    min-height: 145px;
 }
 
 .event-card-details-top {
@@ -831,6 +832,7 @@ span {
 
 .right-widget-title {
     margin: 0 0 10px 0;
+    color: #63f3f7;
 }
 
 .right-widget-title>h3 {

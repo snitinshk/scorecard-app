@@ -193,20 +193,20 @@ var match_key = null
     setInterval(() => {
         $('.event-card-details').each(function(ind,attr){
             var event_time = $(this).attr('data-start-time');
-            console.log(event_time,' '+ timenow+' '+match_key)
             if(timenow >= event_time){
                 //Shot first match data in score detail
-                if(ind == 0 && match_key != null){
+                if(ind == 0 && match_key == null){
                     match_key = $(this).attr('id');
                 }
                 getData($(this).attr('id'));
             }
         });    
-    }, 5000);
+    }, 3000);
 
     function getData(key){
         $.get( "/live-score",{ key: key }, function(response) {
             handleLiveScoreUpcomingMatch(JSON.parse(response).data)
+            console.log(match_key);
             if(match_key && match_key == key){
                 console.log('ploting data for detail: '+match_key)
                 handleSelectedScore(JSON.parse(response).data)
